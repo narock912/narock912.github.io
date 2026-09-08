@@ -6,46 +6,67 @@
 <meta name="color-scheme" content="dark" />
 <title>ALPHA BOARD · Public Market Monitor</title>
 <style>
-:root{--bg:#071015;--panel:#0b151b;--line:#18303a;--text:#d8e7ec;--muted:#78909a;--green:#30e69a;--red:#ff6278;--amber:#ffc857;--blue:#58b8ff;--cyan:#57e6dd}
-*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font:13px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-header{position:sticky;top:0;z-index:5;background:rgba(7,16,21,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:13px 16px}
-.top{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap}.brand{font-weight:900;letter-spacing:.12em}.brand b{color:var(--green)}
-.sub{color:var(--muted);font-size:11px}.status{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.dot{width:7px;height:7px;border-radius:50%;display:inline-block;background:var(--green);box-shadow:0 0 10px var(--green)}
-.controls{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}input,button{background:#0a171d;border:1px solid var(--line);color:var(--text);padding:7px 9px;border-radius:6px;font:inherit}button.active{border-color:var(--green);color:var(--green)}
-main{padding:0 12px 24px}.wrap{overflow:auto;border:1px solid var(--line);border-radius:8px;margin-top:12px;background:var(--panel)}table{border-collapse:collapse;width:100%;min-width:1240px}th,td{padding:10px 9px;border-bottom:1px solid #13262e;white-space:nowrap;text-align:right}th{position:sticky;top:0;background:#09141a;color:#6f8a95;font-size:10px;letter-spacing:.08em;text-transform:uppercase;z-index:2}th:nth-child(2),td:nth-child(2){text-align:left}.rank{color:#6f8994}.sym{font-weight:800;font-size:14px}.tag{font-size:9px;padding:2px 5px;border:1px solid var(--line);border-radius:4px;color:#829aa4;margin-left:5px}.q{font-weight:900}.q.strong{color:var(--green)}.q.good{color:#7fdcff}.q.neutral{color:var(--amber)}.q.watch{color:#9aaeb6}
-.pos{color:var(--green)}.neg{color:var(--red)}.muted{color:var(--muted)}.vabove{color:var(--green)}.vbelow{color:var(--red)}
-footer{color:#607780;text-align:center;padding:14px;font-size:10px}.stale{color:var(--red)}
-@media(max-width:700px){header{padding:10px}main{padding:0 6px}.sub{display:none}th,td{padding:8px 7px}}
+:root{--bg:#071015;--panel:#0b151b;--line:#18303a;--text:#d8e7ec;--muted:#78909a;--green:#30e69a;--red:#ff6278;--amber:#ffc857;--blue:#58b8ff;--cyan:#57e6dd;--violet:#b79cff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:12px/1.42 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+header{position:sticky;top:0;z-index:8;background:rgba(7,16,21,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:11px 14px}
+.top{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}.brand{font-weight:900;letter-spacing:.12em;font-size:13px}.brand b{color:var(--green)}
+.sub{color:var(--muted);font-size:10px}.status{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.dot{width:7px;height:7px;border-radius:50%;display:inline-block;background:var(--green);box-shadow:0 0 10px var(--green)}
+.controls{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}input,button{background:#0a171d;border:1px solid var(--line);color:var(--text);padding:6px 8px;border-radius:6px;font:inherit}button{cursor:pointer}button.active{border-color:var(--green);color:var(--green);background:#0c201b}
+main{padding:0 10px 24px}.wrap{overflow:auto;border:1px solid var(--line);border-radius:8px;margin-top:10px;background:var(--panel)}table{border-collapse:collapse;width:100%;min-width:1280px}
+th,td{padding:8px 6px;border-bottom:1px solid #13262e;white-space:nowrap;text-align:right}th{position:sticky;top:0;background:#09141a;color:#6f8a95;font-size:9px;letter-spacing:.05em;text-transform:uppercase;z-index:2}
+th:nth-child(3),td:nth-child(3){text-align:left}tbody tr{cursor:pointer}tbody tr:hover{background:#0e1d24}.rank{color:#6f8994}.mark{font-size:15px;text-align:center}.sym{font-weight:900;font-size:13px}.tag{display:inline-block;font-size:9px;padding:1px 4px;border:1px solid var(--line);border-radius:4px;color:#8ca5ae;margin-left:3px}.tag.spot{color:var(--green);border-color:#1d654b}.tag.squeeze{color:var(--violet);border-color:#514171}.tag.futures{color:var(--blue);border-color:#315c77}.tag.balanced{color:var(--muted)}
+.q{font-weight:900}.q.strong{color:var(--green)}.q.good{color:#7fdcff}.q.neutral{color:var(--amber)}.q.watch{color:#9aaeb6}.fuel-on{color:var(--green);font-weight:800}.fuel-mid{color:var(--amber)}.fuel-low{color:var(--muted)}.review{font-weight:800}.review-review{color:var(--green)}.review-watch{color:var(--blue)}.review-wait{color:var(--muted)}.review-caution{color:var(--red)}
+.pos{color:var(--green)}.neg{color:var(--red)}.muted{color:var(--muted)}.vabove{color:var(--green)}.vbelow{color:var(--red)}footer{color:#607780;text-align:center;padding:13px;font-size:9px}.stale{color:var(--red)}
+#modal{position:fixed;inset:0;background:rgba(1,6,9,.76);display:none;align-items:center;justify-content:center;z-index:20;padding:16px}#modal.open{display:flex}.card{width:min(860px,96vw);max-height:88vh;overflow:auto;background:#09141a;border:1px solid #24424e;border-radius:10px;box-shadow:0 24px 80px rgba(0,0,0,.55)}.cardHead{position:sticky;top:0;background:#09141a;border-bottom:1px solid var(--line);padding:12px 14px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;z-index:2}.cardTitle{font-size:16px;font-weight:900}.close{font-size:17px;padding:2px 8px}.cardBody{padding:12px 14px}.summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:12px}.box{border:1px solid var(--line);background:#0b171d;border-radius:7px;padding:8px}.box .k{color:var(--muted);font-size:9px}.box .v{font-weight:900;margin-top:3px}.detailTable{min-width:0;width:100%;border:1px solid var(--line);border-radius:6px;overflow:hidden}.detailTable th,.detailTable td{position:static;padding:7px 8px;text-align:left}.detailTable th{width:150px;color:#79929c;background:#0a171d}.notes{margin-top:12px;border:1px solid var(--line);border-radius:7px;padding:9px 10px}.notes div{margin:3px 0}.disc{margin-top:11px;color:var(--muted);font-size:9px}
+@media(max-width:760px){header{padding:9px}main{padding:0 5px}.sub{display:none}th,td{padding:7px 5px}.summary{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 </head>
 <body>
 <header>
   <div class="top">
-    <div><div class="brand">ALPHA <b>BOARD</b> · PUBLIC</div><div class="sub">시장 현황판 · 공개용 QUALITY · 매매 시그널/진입판정 아님</div></div>
+    <div><div class="brand">ALPHA <b>BOARD</b> · PUBLIC</div><div class="sub">데이터 좋은 순 현황판 · 공개 가이드 마크는 실제 Alpha Entry가 아님</div></div>
     <div class="status"><span><span class="dot" id="dot"></span> <span id="fresh">loading</span></span><span id="updated" class="muted">—</span><span id="count" class="muted">—</span></div>
   </div>
   <div class="controls">
     <input id="search" placeholder="Symbol 검색" autocomplete="off" />
-    <button data-filter="ALL" class="active">ALL</button><button data-filter="CRYPTO">CRYPTO</button><button data-filter="TRADFI">TRADFI</button>
+    <button data-filter="ALL" class="active">전체</button>
+    <button data-filter="SPOT">현물주도</button>
+    <button data-filter="SHORT_SQUEEZE">숏스퀴즈</button>
+    <button data-filter="FUTURES">선물주도</button>
     <button id="refresh">새로고침</button>
   </div>
 </header>
 <main><div class="wrap"><table>
-<thead><tr><th>#</th><th>SYMBOL</th><th>QUALITY</th><th>PRICE</th><th>24H</th><th>OI 4H</th><th>CVD</th><th>FUNDING</th><th>TURNOVER</th><th>VOL</th><th>VWAP</th><th>ATR</th><th>RANGE POS</th></tr></thead>
-<tbody id="body"><tr><td colspan="13" class="muted" style="text-align:center">데이터 대기 중…</td></tr></tbody>
+<thead><tr><th>#</th><th>MARK</th><th>SYMBOL</th><th>QUALITY</th><th>FUEL</th><th>GUIDE</th><th>TYPE</th><th>PRICE</th><th>24H</th><th>OI 4H</th><th>CVD</th><th>FR</th><th>VOL</th><th>TURNOVER</th><th>ATR</th></tr></thead>
+<tbody id="body"><tr><td colspan="15" class="muted" style="text-align:center">데이터 대기 중…</td></tr></tbody>
 </table></div></main>
-<footer>Public market monitor only · No Entry / TP / SL / Monster / Huns / private Alpha data is published.</footer>
+<footer>Public market monitor only · ⭐/🟢/🟡/⚠️, 연료/검토는 공개용 가이드이며 Entry / TP / SL / Monster / Huns 내부판정이 아닙니다.</footer>
+
+<div id="modal" role="dialog" aria-modal="true"><div class="card">
+  <div class="cardHead"><div><div id="mTitle" class="cardTitle">—</div><div id="mTags"></div></div><button class="close" id="close">×</button></div>
+  <div class="cardBody"><div class="summary" id="mSummary"></div><table class="detailTable" id="mTable"></table><div class="notes" id="mNotes"></div><div class="disc">상세 패널 역시 공개용 시장현황 해석입니다. 개인용 Alpha/Huns 매매 기준은 포함하지 않습니다.</div></div>
+</div></div>
 <script>
-let DATA=null, FILTER='ALL';
-const $=s=>document.querySelector(s), fmt=(v,d=2)=>v==null?'N/A':Number(v).toLocaleString(undefined,{maximumFractionDigits:d}), sign=(v,d=2)=>v==null?'N/A':`${v>0?'+':''}${Number(v).toFixed(d)}%`;
-function money(v){if(v==null)return'N/A'; v=Number(v); if(v>=1e9)return'$'+(v/1e9).toFixed(2)+'B'; if(v>=1e6)return'$'+(v/1e6).toFixed(1)+'M'; if(v>=1e3)return'$'+(v/1e3).toFixed(0)+'K'; return'$'+v.toFixed(0)}
+let DATA=null,FILTER='ALL';
+const $=s=>document.querySelector(s),fmt=(v,d=2)=>v==null?'N/A':Number(v).toLocaleString(undefined,{maximumFractionDigits:d}),sign=(v,d=2)=>v==null?'N/A':`${v>0?'+':''}${Number(v).toFixed(d)}%`;
+function money(v){if(v==null)return'N/A';v=Number(v);if(v>=1e9)return'$'+(v/1e9).toFixed(2)+'B';if(v>=1e6)return'$'+(v/1e6).toFixed(1)+'M';if(v>=1e3)return'$'+(v/1e3).toFixed(0)+'K';return'$'+v.toFixed(0)}
 function cls(v){return v==null?'muted':v>0?'pos':v<0?'neg':'muted'}
-function qcls(g){return (g||'watch').toLowerCase()}
-function render(){if(!DATA)return; const q=$('#search').value.trim().toUpperCase(); let rows=(DATA.rows||[]).filter(r=>(FILTER==='ALL'||r.market===FILTER)&&(!q||r.symbol.includes(q)));
-$('#body').innerHTML=rows.length?rows.map(r=>`<tr><td class="rank">${r.rank}</td><td><span class="sym">${r.symbol}</span><span class="tag">${r.market}</span></td><td class="q ${qcls(r.grade)}">${r.quality} <span class="tag">${r.grade}</span></td><td>${fmt(r.price,8)}</td><td class="${cls(r.p24)}">${sign(r.p24)}</td><td class="${cls(r.oi4)}">${sign(r.oi4)}</td><td class="${r.cvd==null?'muted':r.cvd>=60?'pos':r.cvd<45?'neg':''}">${r.cvd==null?'N/A':fmt(r.cvd,1)+'%'}</td><td class="${r.funding==null?'muted':Math.abs(r.funding)>=.06?'neg':''}">${r.funding==null?'N/A':sign(r.funding,4)}</td><td>${money(r.turnover)}</td><td>${r.surge==null?'N/A':'×'+fmt(r.surge,2)}</td><td class="${r.vwap==='ABOVE'?'vabove':'vbelow'}">${r.vwap||'N/A'}</td><td>${r.atr==null?'N/A':fmt(r.atr,2)+'%'}</td><td>${r.range_pos==null?'N/A':fmt(r.range_pos,1)+'%'}</td></tr>`).join(''):`<tr><td colspan="13" class="muted" style="text-align:center">조건에 맞는 종목 없음</td></tr>`;
-}
-async function load(){try{const r=await fetch('./alpha_public.json?t='+Date.now(),{cache:'no-store'}); if(!r.ok)throw Error('HTTP '+r.status); DATA=await r.json(); const age=Math.max(0,Math.floor(Date.now()/1000-(DATA.updated_ts||0))); $('#updated').textContent='updated '+(DATA.updated||'—'); $('#count').textContent=(DATA.count||0)+' symbols'; const stale=age>Math.max(600,(DATA.scan_sec||180)*3); $('#fresh').textContent=stale?'STALE '+Math.floor(age/60)+'m':'LIVE'; $('#fresh').className=stale?'stale':''; $('#dot').style.background=stale?'var(--red)':'var(--green)'; render();}catch(e){$('#fresh').textContent='DATA ERROR';$('#fresh').className='stale';$('#dot').style.background='var(--red)';}}
-$('#search').addEventListener('input',render); document.querySelectorAll('[data-filter]').forEach(b=>b.onclick=()=>{FILTER=b.dataset.filter;document.querySelectorAll('[data-filter]').forEach(x=>x.classList.toggle('active',x===b));render()}); $('#refresh').onclick=load;
-load(); setInterval(load,30000);
+function qcls(g){return(g||'watch').toLowerCase()}function fcls(x){return 'fuel-'+(x||'LOW').toLowerCase()}function rcls(x){return 'review-'+(x||'WAIT').toLowerCase()}
+const fuelKo=x=>x==='ON'?'ON':x==='MID'?'MID':'LOW';const reviewKo=x=>x==='REVIEW'?'진입검토':x==='WATCH'?'관찰':x==='CAUTION'?'과열주의':'대기';
+function tagHtml(tags){return(tags||[]).map(t=>t==='SPOT'?'<span class="tag spot">현물주도</span>':t==='SHORT_SQUEEZE'?'<span class="tag squeeze">숏스퀴즈</span>':t==='FUTURES'?'<span class="tag futures">선물주도</span>':'<span class="tag balanced">균형</span>').join('')}
+function matches(r){if(FILTER==='ALL')return true;return(r.tags||[]).includes(FILTER)}
+function render(){if(!DATA)return;const q=$('#search').value.trim().toUpperCase();let rows=(DATA.rows||[]).filter(r=>matches(r)&&(!q||r.symbol.includes(q)));
+$('#body').innerHTML=rows.length?rows.map(r=>`<tr data-rank="${r.rank}"><td class="rank">${r.rank}</td><td class="mark">${r.public_mark||'🟡'}</td><td><span class="sym">${r.symbol}</span></td><td class="q ${qcls(r.grade)}">${r.quality}</td><td class="${fcls(r.fuel)}">${fuelKo(r.fuel)} <span class="muted">${r.fuel_score}</span></td><td class="review ${rcls(r.review)}">${reviewKo(r.review)}</td><td>${tagHtml(r.tags)}</td><td>${fmt(r.price,8)}</td><td class="${cls(r.p24)}">${sign(r.p24)}</td><td class="${cls(r.oi4)}">${sign(r.oi4)}</td><td class="${r.cvd==null?'muted':r.cvd>=60?'pos':r.cvd<45?'neg':''}">${r.cvd==null?'N/A':fmt(r.cvd,1)+'%'}</td><td class="${r.funding==null?'muted':r.funding>=.08?'neg':r.funding<=-.03?'pos':''}">${r.funding==null?'N/A':sign(r.funding,4)}</td><td>${r.surge==null?'N/A':'×'+fmt(r.surge,2)}</td><td>${money(r.turnover)}</td><td>${r.atr==null?'N/A':fmt(r.atr,2)+'%'}</td></tr>`).join(''):`<tr><td colspan="15" class="muted" style="text-align:center">조건에 맞는 종목 없음</td></tr>`;
+document.querySelectorAll('#body tr[data-rank]').forEach(tr=>tr.onclick=()=>openDetail(Number(tr.dataset.rank)));}
+function rowByRank(rank){return(DATA.rows||[]).find(x=>x.rank===rank)}
+function box(k,v,cl=''){return`<div class="box"><div class="k">${k}</div><div class="v ${cl}">${v}</div></div>`}
+function openDetail(rank){const r=rowByRank(rank);if(!r)return;$('#mTitle').innerHTML=`${r.public_mark||'🟡'} ${r.symbol} · QUALITY ${r.quality}`;$('#mTags').innerHTML=tagHtml(r.tags);
+$('#mSummary').innerHTML=box('연료',`${fuelKo(r.fuel)} · ${r.fuel_score}`,fcls(r.fuel))+box('공개 가이드',reviewKo(r.review),rcls(r.review))+box('현물주도 점수',r.driver?.spot??'N/A','pos')+box('선물주도 점수',r.driver?.futures??'N/A','')+box('숏스퀴즈 점수',r.driver?.short_squeeze??'N/A','')+box('24H',sign(r.p24),cls(r.p24))+box('OI 4H',sign(r.oi4),cls(r.oi4))+box('CVD',r.cvd==null?'N/A':fmt(r.cvd,1)+'%');
+const rows=[['PRICE',fmt(r.price,8)],['4H 가격',sign(r.ret4)],['OI 1H',sign(r.oi1)],['OI 4H',sign(r.oi4)],['CVD',r.cvd==null?'N/A':fmt(r.cvd,1)+'%'],['Funding',r.funding==null?'N/A':sign(r.funding,4)],['Turnover',money(r.turnover)],['Volume Surge',r.surge==null?'N/A':'×'+fmt(r.surge,2)],['VWAP',r.vwap||'N/A'],['ATR',r.atr==null?'N/A':fmt(r.atr,2)+'%'],['Range Position',r.range_pos==null?'N/A':fmt(r.range_pos,1)+'%'],['Flow',r.flow==null?'N/A':fmt(r.flow,1)],['BB Position',r.bb_pos==null?'N/A':fmt(r.bb_pos,1)+'%']];
+$('#mTable').innerHTML='<tbody>'+rows.map(x=>`<tr><th>${x[0]}</th><td>${x[1]}</td></tr>`).join('')+'</tbody>';const ns=[...(r.notes||[])];if((r.risk_flags||[]).length)ns.push('리스크: '+r.risk_flags.join(' · '));$('#mNotes').innerHTML='<b>공개 해석</b>'+ (ns.length?ns.map(x=>`<div>• ${x}</div>`).join(''):'<div class="muted">• 특이사항 없음</div>');$('#modal').classList.add('open')}
+function closeDetail(){$('#modal').classList.remove('open')}$('#close').onclick=closeDetail;$('#modal').onclick=e=>{if(e.target===$('#modal'))closeDetail()};document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDetail()});
+async function load(){try{const r=await fetch('./alpha_public.json?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status);DATA=await r.json();const age=Math.max(0,Math.floor(Date.now()/1000-(DATA.updated_ts||0)));$('#updated').textContent='updated '+(DATA.updated||'—');$('#count').textContent=(DATA.count||0)+' symbols · web '+(DATA.publish_sec||300)+'s';const stale=age>Math.max(900,(DATA.scan_sec||180)*4);$('#fresh').textContent=stale?'STALE '+Math.floor(age/60)+'m':'LIVE';$('#fresh').className=stale?'stale':'';$('#dot').style.background=stale?'var(--red)':'var(--green)';render()}catch(e){$('#fresh').textContent='DATA ERROR';$('#fresh').className='stale';$('#dot').style.background='var(--red)'}}
+$('#search').addEventListener('input',render);document.querySelectorAll('[data-filter]').forEach(b=>b.onclick=()=>{FILTER=b.dataset.filter;document.querySelectorAll('[data-filter]').forEach(x=>x.classList.toggle('active',x===b));render()});$('#refresh').onclick=load;
+load();setInterval(load,60000);
 </script>
 </body></html>
