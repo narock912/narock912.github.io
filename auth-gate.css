@@ -1,0 +1,62 @@
+:root {
+  --auth-bg: rgba(8, 12, 20, .58);
+  --auth-panel: rgba(20, 25, 36, .96);
+  --auth-line: rgba(255,255,255,.12);
+  --auth-text: #f4f7fb;
+  --auth-sub: #9ba7b7;
+  --auth-accent: #7dd3fc;
+  --auth-danger: #fca5a5;
+  --auth-ok: #86efac;
+}
+body.auth-locked { overflow: hidden !important; }
+body.auth-locked > *:not(#auth-gate-root):not(script):not(style) {
+  filter: blur(10px) saturate(.78);
+  pointer-events: none !important;
+  user-select: none !important;
+}
+#auth-gate-root {
+  position: fixed; inset: 0; z-index: 2147483647;
+  display: grid; place-items: center;
+  background: var(--auth-bg);
+  backdrop-filter: blur(2px);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", Arial, sans-serif;
+}
+#auth-gate-root[hidden] { display: none !important; }
+.auth-card {
+  width: min(92vw, 390px); color: var(--auth-text);
+  background: var(--auth-panel); border: 1px solid var(--auth-line);
+  border-radius: 18px; box-shadow: 0 24px 80px rgba(0,0,0,.42);
+  padding: 24px;
+}
+.auth-brand { font-weight: 800; font-size: 20px; letter-spacing: .02em; }
+.auth-sub { color: var(--auth-sub); font-size: 13px; margin-top: 6px; line-height: 1.5; }
+.auth-tabs { display:flex; gap:8px; margin:20px 0 16px; }
+.auth-tabs button {
+  flex:1; border:1px solid var(--auth-line); background:transparent; color:var(--auth-sub);
+  border-radius:10px; padding:10px; cursor:pointer; font-weight:700;
+}
+.auth-tabs button.active { color:var(--auth-text); border-color:rgba(125,211,252,.55); background:rgba(125,211,252,.08); }
+.auth-field { margin: 12px 0; }
+.auth-field label { display:block; font-size:12px; color:var(--auth-sub); margin-bottom:6px; }
+.auth-field input {
+  width:100%; box-sizing:border-box; border:1px solid var(--auth-line); border-radius:10px;
+  padding:12px 13px; background:rgba(255,255,255,.055); color:var(--auth-text); outline:none;
+}
+.auth-field input:focus { border-color: rgba(125,211,252,.65); }
+.auth-submit {
+  width:100%; margin-top:10px; border:0; border-radius:11px; padding:12px 14px;
+  background:var(--auth-accent); color:#07111a; font-weight:900; cursor:pointer;
+}
+.auth-msg { min-height:20px; margin-top:12px; font-size:13px; line-height:1.5; color:var(--auth-sub); }
+.auth-msg.error { color:var(--auth-danger); }
+.auth-msg.ok { color:var(--auth-ok); }
+.auth-pending { text-align:center; padding:8px 0 2px; }
+.auth-pending strong { display:block; font-size:18px; margin-bottom:8px; }
+#auth-user-chip {
+  position: fixed; right: 12px; bottom: 12px; z-index: 2147483000;
+  display:flex; gap:8px; align-items:center; padding:8px 10px;
+  border:1px solid rgba(255,255,255,.12); border-radius:999px;
+  background:rgba(18,22,30,.88); color:#e5e7eb; font:12px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif;
+  box-shadow:0 8px 30px rgba(0,0,0,.22);
+}
+#auth-user-chip button { border:0; border-radius:999px; padding:5px 8px; cursor:pointer; }
